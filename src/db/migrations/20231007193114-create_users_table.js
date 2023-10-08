@@ -14,11 +14,11 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
-      firstname: {
+      first_name: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      lastname: {
+      last_name: {
         allowNull: true,
         type: Sequelize.STRING,
       },
@@ -35,10 +35,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      verified: {
+      status: {
+        type: Sequelize.ENUM('pending', 'active', 'des_active'),
         allowNull: false,
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+        defaultValue: 'pending',
       },
       otp: {
         allowNull: true,
@@ -50,7 +50,7 @@ module.exports = {
       },
       roles: {
         allowNull: false,
-        type: Sequelize.ENUM('admin', 'staff', 'user'),
+        type: Sequelize.ENUM('admin', 'super_admin', 'user'),
         defaultValue: 'user',
       },
       created_at: {
@@ -65,7 +65,7 @@ module.exports = {
       },
       updated_by: {
         allowNull: true,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       deleted_at: {
         allowNull: true,
@@ -73,7 +73,7 @@ module.exports = {
       },
       deleted_by: {
         allowNull: true,
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
     });
   },
