@@ -53,7 +53,7 @@ export class UserService {
       otpExpiry,
     });
 
-    await this.emailService.sendOtp(newUser.id, otp);
+    // await this.emailService.sendOtp(newUser.id, otp);
 
     return newUser.get({ plain: true });
   }
@@ -78,7 +78,7 @@ export class UserService {
     id: number,
     otp: string,
     data: IUserInfo,
-  ): Promise<IUser> {
+  ): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) throw new NotFoundException('user not found ');
     const isVerified = await compare(otp, user.otp);

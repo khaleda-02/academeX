@@ -14,6 +14,11 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      email: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        unique: true,
+      },
       first_name: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -22,23 +27,30 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
-      email: {
+      phone_number: {
         allowNull: false,
         type: Sequelize.STRING,
-        unique: true,
       },
       password: {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      phone_number: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
       status: {
         type: Sequelize.ENUM('pending', 'active', 'des_active'),
-        allowNull: false,
-        defaultValue: 'pending',
+          allowNull: false,
+          defaultValue: 'pending',
+      },
+      user_image: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      profile_image: {
+        allowNull: true,
+        type: Sequelize.STRING,
+      },
+      bio: {
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       otp: {
         allowNull: true,
@@ -48,7 +60,7 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE,
       },
-      roles: {
+      role: {
         allowNull: false,
         type: Sequelize.ENUM('admin', 'super_admin', 'user'),
         defaultValue: 'user',

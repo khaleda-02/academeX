@@ -14,11 +14,11 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  firstname: string;
+  firstName: string;
 
   @IsOptional()
   @IsString()
-  lastname: string;
+  lastName: string;
 
   @IsNotEmpty()
   @IsString()
@@ -33,4 +33,16 @@ export class CreateUserDto {
   @IsString()
   @Length(10)
   phoneNumber: string;
+  
+  @IsOptional()
+  @IsString()
+  userImage: string;
+
+  @IsOptional()
+  @IsString()
+  profileImage: string;
+
+  @IsOptional()
+  @IsString()
+  bio: string;
 }

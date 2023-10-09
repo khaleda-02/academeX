@@ -2,16 +2,15 @@ import { ENUM } from 'sequelize';
 import {
   Column,
   DataType,
-  HasMany,
   PrimaryKey,
   Table,
   Unique,
   Model,
   AutoIncrement,
   Scopes,
+  AllowNull,
 } from 'sequelize-typescript';
 import { Role, UserStatus } from 'src/common/enums';
-import { Email } from 'src/modules/email/models/email.model';
 
 const { DATE, NUMBER, STRING } = DataType;
 const excludedDates = [
@@ -26,7 +25,7 @@ const excludedDates = [
 @Scopes(() => ({
   login: {
     attributes: {
-      exclude: [...excludedDates , 'otp', 'otpExpiry'], // get all attributes for admins
+      exclude: [...excludedDates, 'otp', 'otpExpiry'], 
     },
   },
 }))
@@ -43,31 +42,46 @@ const excludedDates = [
 export class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
+  @AllowNull(false)
   @Column(NUMBER)
   id: number;
 
   @Unique
+  @AllowNull(false)
   @Column(STRING)
   username: string;
 
   @Unique
+  @AllowNull(false)
   @Column(STRING)
   email: string;
 
+  @AllowNull(false)
   @Column(STRING)
-  firstname: string;
+  firstName: string;
 
   @Column(STRING)
-  lastname: string;
+  lastName: string;
 
+  @AllowNull(false)
   @Column(NUMBER)
   phoneNumber: string;
 
+  @AllowNull(false)
   @Column(STRING)
   password: string;
 
   @Column(ENUM(UserStatus.ACTIVE, UserStatus.DES_ACTIVE, UserStatus.PENDING))
   status: UserStatus;
+
+  @Column(STRING)
+  userImage: string;
+
+  @Column(STRING)
+  profileImage: string;
+
+  @Column(STRING)
+  bio: string;
 
   @Column(STRING)
   otp: string;
@@ -76,23 +90,22 @@ export class User extends Model<User> {
   otpExpiry: Date;
 
   @Column(ENUM(Role.ADMIN, Role.USER, Role.SUPER_ADMIN))
-  roles: Role;
+  role: Role;
 
-  @HasMany(() => Email)
-  emails: Email[];
-
+  @AllowNull(false)
   @Column(DATE)
   createdAt: Date;
 
+  @AllowNull(false)
   @Column(DATE)
   updatedAt: Date;
 
-  @Column(STRING)
-  updatedBy: string;
+  @Column(NUMBER)
+  updatedBy: number;
 
   @Column(DATE)
   deletedAt: Date;
 
-  @Column(STRING)
-  deletedBy: string;
+  @Column(NUMBER)
+  deletedBy: number;
 }

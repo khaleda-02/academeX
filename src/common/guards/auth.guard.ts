@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate {
       if (
         !user ||
         (user.status != UserStatus.ACTIVE &&
-          user.roles != Role.ADMIN )
+          user.role != Role.ADMIN )
       )
         return false;
       // if (!user) return false;
