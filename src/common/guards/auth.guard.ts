@@ -30,16 +30,15 @@ export class AuthGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
       });
 
-      //finding the user , and didn't store teh user in the token
-      // to get the latest user info (because maybe the user's info got updated)
       const { password, ...user } = await this.userService.findOne(username);
-      if (
-        !user ||
-        (user.status != UserStatus.ACTIVE &&
-          user.role != Role.ADMIN )
-      )
-        return false;
-      // if (!user) return false;
+      // if (
+      //   !user ||
+      //   (user.status != UserStatus.ACTIVE &&
+      //     user.role != Role.ADMIN )
+      // )
+      //   return false;
+      console.log('user', user);
+      if (!user) return false;
       request['user'] = user;
       return true;
     } catch (err) {

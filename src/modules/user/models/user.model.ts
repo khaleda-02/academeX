@@ -9,8 +9,10 @@ import {
   AutoIncrement,
   Scopes,
   AllowNull,
+  HasMany,
 } from 'sequelize-typescript';
 import { Role, UserStatus } from 'src/common/enums';
+import { Post } from 'src/modules/post/models/post.model';
 
 const { DATE, NUMBER, STRING } = DataType;
 const excludedDates = [
@@ -25,7 +27,7 @@ const excludedDates = [
 @Scopes(() => ({
   login: {
     attributes: {
-      exclude: [...excludedDates, 'otp', 'otpExpiry'], 
+      exclude: [...excludedDates, 'otp', 'otpExpiry'],
     },
   },
 }))
@@ -108,4 +110,7 @@ export class User extends Model<User> {
 
   @Column(NUMBER)
   deletedBy: number;
+
+  @HasMany(() => Post)
+  posts: Post[];
 }
